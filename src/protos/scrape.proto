@@ -1,0 +1,53 @@
+
+package com.anupams.protogen;
+/**
+ * A scraper can at any given point of time either scrape or navigate to a page.
+ * Step is a top level abstraction needed by the framework to determine if it has to scrape
+ * or navigate to a new page or make an ajax call.
+ */
+message Step {
+
+  enum Type {
+    NAVIGATE = 1;
+    SCRAPE = 2;
+    PAGINATED = 3;
+  }
+
+  required Type step_type = 1;
+
+  // The DOM element that has the information scraper intends to scrape.
+  repeated Element element = 2;
+}
+
+
+/**
+ * The DOM element along with the information it has to be accessed, for i.e.  through
+ * XPATH, ID or CSS html attributes.
+ */
+message Element {
+  enum By {
+    XPATH = 0;
+    CSS = 1;
+    ID = 2;
+    CLASS = 3;
+  }
+
+  // The user provided id to identify an element in the resultset. It must be unique in a step,
+  // it's advisable to construct it with the form <ELEMENT.BY>_<ELEMENT_VALUE>
+  required string id = 1;
+    // The enum describes the how an element is to be searched i.e. by XPATH, ID or CSS etc.
+  required By search_by = 2;
+  // The value used to search an element in the DOM.
+  required string value = 3;
+  // The elements that are to be searched relative to the containing element.
+  repeated Relative relative_element = 4;
+}
+
+
+/**
+ * The elements that
+ */
+message Relative {
+  required string parent_id = 1;
+  repeated Element elements = 2;
+}
