@@ -1,8 +1,10 @@
 package com.scrappy.sites;
 
 import com.anupams.protogen.Scrape.Element;
+import com.anupams.protogen.Scrape.Step;
 import com.anupams.protogen.Scrape.Element.By;
 import com.anupams.protogen.Scrape.Relative;
+import com.anupams.protogen.Scrape.Step.Type;
 
 /**
  * Constants to be used for unit testing of sites package.
@@ -37,6 +39,9 @@ public interface TestConstants {
    * A root element containing an element to be searched as its relative.
    */
   public static final Element.Builder ELEMENT_WITH_RELATIVE =
-      ELEMENT_USED_AS_PARENT.addRelativeElement(RELATIVE_ELEMENT);
+      ELEMENT_USED_AS_PARENT.build().toBuilder().addRelativeElement(RELATIVE_ELEMENT);
+
+  public static final Step.Builder STEP = 
+      Step.newBuilder().setStepType(Type.SCRAPE).addElement(ELEMENT_WITH_RELATIVE);
 
 }

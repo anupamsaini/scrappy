@@ -4,6 +4,7 @@ import com.anupams.protogen.Scrape.Element;
 import com.anupams.protogen.Scrape.Relative;
 import com.anupams.protogen.Scrape.Step;
 import com.anupams.protogen.Scrape.Element.By;
+import com.anupams.protogen.Scrape.Step.Type;
 
 import java.util.List;
 
@@ -63,6 +64,42 @@ public interface Config {
    * @return the generated element
    */
   public Element buildElement(String id, By searchElementBy, String value, Relative... relatives);
+
+  /**
+   * Generates a new {@link Step}.
+   *
+   * @param stepType identifies the {@link Type} of a step
+   * @param element the optional {@link Element} to be scraped from DOM
+   * @return a generated step
+   */
+  public Step buildStep(Type stepType, Element element);
+
+  /**
+   * Generates a new {@link Step} with a list of {@link Element} .
+   *
+   * @param stepType identifies the {@link Type} of a step
+   * @param elements the elements part of this step
+   * @return a generated step
+   */
+  public Step buildStep(Type stepType, List<Element> elements);
+
+  /**
+   * Adds an {@link Element} to a {@link Step}.
+   *
+   * @param existingStep the existing step to add to
+   * @param elementToAdd the element to be added
+   * @return the updated step
+   */
+  public Step addElementToStep(Step existingStep, Element elementToAdd);
+
+  /**
+   * Adds a list of {@link Element} to a {@link Step}.
+   *
+   * @param existingStep the existing step to add to
+   * @param elementsToAdd the list of elements to be added
+   * @return the updated step
+   */
+  public Step addElementsToStep(Step existingStep, List<Element> elementsToAdd);
 
   /**
    * Constructs a list of steps needed to scrape the site under consideration.
