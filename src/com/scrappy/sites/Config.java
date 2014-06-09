@@ -18,10 +18,10 @@ public interface Config {
    * Adds {@link Relative} elements to an existing element.
    *
    * @param existingElement the element to which relative elements are to be added
-   * @param relatives an array of relatives to be added
+   * @param relative a relative element to be added
    * @return the updated element
    */
-  public Element addRelativeElements(Element existingElement, Relative... relatives);
+  public Element addRelativeToElement(Element existingElement, Relative relative);
 
   /**
    * Adds {@link Relative} elements to an existing element.
@@ -30,7 +30,7 @@ public interface Config {
    * @param relatives a list of relatives to be added
    * @return the updated element
    */
-  public Element addRelativeElements(Element existingElement, List<Relative> relatives);
+  public Element addRelativesToElement(Element existingElement, List<Relative> relatives);
 
   /**
    * Generates an {@link Element} to be scraped.
@@ -48,11 +48,10 @@ public interface Config {
    * @param id the unique identifier of the element in configuration
    * @param searchElementBy specifies they way dom would be queried, i.e through CSS,ID,XPATH etc
    * @param value the value to be looked up in the dom
-   * @param relatives a list of elements to be searched as child of the element being built
+   * @param relatives a relative element to be searched as child of the element being built
    * @return the generated element
    */
-  public Element buildElement(String id, By searchElementBy, String value,
-      List<Relative> relatives);
+  public Element buildElement(String id, By searchElementBy, String value, Relative relatives);
 
   /**
    * Generates an {@link Element} to be scraped.
@@ -60,10 +59,11 @@ public interface Config {
    * @param id the unique identifier of the element in configuration
    * @param searchElementBy specifies they way dom would be queried, i.e through CSS,ID,XPATH etc
    * @param value the value to be looked up in the dom
-   * @param relatives an array of elements to be searched as child of the element being built
+   * @param relatives a list of elements to be searched as child of the element being built
    * @return the generated element
    */
-  public Element buildElement(String id, By searchElementBy, String value, Relative... relatives);
+  public Element buildElement(String id, By searchElementBy, String value,
+      List<Relative> relatives);
 
   /**
    * Generates a new {@link Step}.

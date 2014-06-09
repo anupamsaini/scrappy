@@ -2,7 +2,6 @@ package com.scrappy.sites.google;
 
 import com.google.common.collect.Lists;
 
-import com.anupams.protogen.Scrape.Element;
 import com.anupams.protogen.Scrape.Element.By;
 import com.anupams.protogen.Scrape.Step;
 import com.anupams.protogen.Scrape.Step.Type;
@@ -17,9 +16,7 @@ import java.util.List;
 public class GoogleConfig extends BaseConfig implements Config {
 
   private Step landingPage() {
-    Step.Builder stepBuilder = Step.newBuilder();
-    Element element = buildElement("id_gbqfsa", By.ID, "gbqfsa");
-    return stepBuilder.addElement(element).setStepType(Type.SCRAPE).build();
+    return buildStep(Type.SCRAPE, buildElement("id_gbqfsa", By.ID, "gbqfsa"));
   }
 
   @Override
