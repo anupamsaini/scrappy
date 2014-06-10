@@ -17,6 +17,9 @@ message Step {
 
   // The DOM element that has the information scraper intends to scrape.
   repeated Element element = 2;
+
+  // Optional class to invoke with the passed webdriver object.
+  optional string callback_class = 3;
 }
 
 
