@@ -1,28 +1,29 @@
 package com.scrappy.sites.google;
 
-import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
-import com.anupams.protogen.Scrape.Element.By;
-import com.anupams.protogen.Scrape.Step;
-import com.anupams.protogen.Scrape.Step.Type;
-import com.scrappy.sites.BaseConfig;
-import com.scrappy.sites.Config;
-
-import java.util.List;
+import com.scrappy.protogen.Scrape.Element.By;
+import com.scrappy.protogen.Scrape.Step;
+import com.scrappy.protogen.Scrape.Step.Type;
+import com.scrappy.sites.ScrapeConfig;
 
 /**
  * Scrape {@link Step} configuration class for <a href="http://google.com">http://google.com</a>
  */
-public class GoogleConfig extends BaseConfig implements Config {
+public class GoogleConfig {
 
-  private Step landingPage() {
-    return buildStep(Type.SCRAPE, buildElement("id_gbqfsa", By.ID, "gbqfsa"));
+  private final ScrapeConfig scrapeConfig;
+
+  @Inject
+  public GoogleConfig(ScrapeConfig scrapeConfig) {
+    this.scrapeConfig = scrapeConfig;
   }
 
-  @Override
-  public List<Step> constructConfig() {
-    List<Step> steps = Lists.newArrayList();
-    steps.add(landingPage());
-    return steps;
+  private Step landingPage() {
+    return scrapeConfig.buildStep(Type.SCRAPE, scrapeConfig.buildElement(By.ID, "gbqfsa"), "test");
+  }
+
+  public void buildConfiguration() {
+    landingPage();
   }
 }

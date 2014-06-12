@@ -1,10 +1,10 @@
 package com.scrappy.sites;
 
-import com.anupams.protogen.Scrape.Element;
-import com.anupams.protogen.Scrape.Step;
-import com.anupams.protogen.Scrape.Element.By;
-import com.anupams.protogen.Scrape.Relative;
-import com.anupams.protogen.Scrape.Step.Type;
+import com.scrappy.protogen.Scrape.Element;
+import com.scrappy.protogen.Scrape.Element.By;
+import com.scrappy.protogen.Scrape.Relative;
+import com.scrappy.protogen.Scrape.Step;
+import com.scrappy.protogen.Scrape.Step.Type;
 
 /**
  * Constants to be used for unit testing of sites package.
@@ -14,8 +14,8 @@ public interface TestConstants {
 
   public static final String DUMMY = "dummy";
   public static final String ID_SUB_PART = DUMMY + "_" + By.ID.name();
-  public static final String PARENT_ID = "parent_" + ID_SUB_PART;
-  public static final String CHILD_ID = "child_" + ID_SUB_PART;
+  public static final String PARENT_ID = By.ID.name().toLowerCase() + "_" + DUMMY;
+  public static final String CHILD_ID = By.ID.name().toLowerCase() + "_" + DUMMY;
 
   /**
    * Used as the root element to be searched in DOM.
@@ -33,7 +33,7 @@ public interface TestConstants {
    * Place holder for an element to be searched in relation to a root element.
    */
   public static final Relative.Builder RELATIVE_ELEMENT =
-      Relative.newBuilder().setParentId(PARENT_ID).addElements(ELEMENT_USED_AS_CHILD.build());
+      Relative.newBuilder().setParentId(PARENT_ID).addElement(ELEMENT_USED_AS_CHILD.build());
 
   /**
    * A root element containing an element to be searched as its relative.
@@ -41,7 +41,10 @@ public interface TestConstants {
   public static final Element.Builder ELEMENT_WITH_RELATIVE =
       ELEMENT_USED_AS_PARENT.build().toBuilder().addRelativeElement(RELATIVE_ELEMENT);
 
-  public static final Step.Builder STEP = 
-      Step.newBuilder().setStepType(Type.SCRAPE).addElement(ELEMENT_WITH_RELATIVE);
+  public static final Step.Builder SCRAPE_STEP = Step.newBuilder().setStepType(Type.SCRAPE)
+      .addElement(ELEMENT_WITH_RELATIVE).setCallbackClass(DUMMY);
+
+  public static final Step.Builder NAVIGATE_STEP =
+      Step.newBuilder().setStepType(Type.NAVIGATE).setCallbackClass(DUMMY);
 
 }
