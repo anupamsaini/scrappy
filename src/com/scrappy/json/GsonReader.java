@@ -32,17 +32,17 @@ public class GsonReader {
    */
   public Scraper jsonStringToObject(Reader data) {
     Scraper scrape = gson.fromJson(data, Scraper.class);
-    System.out.println(scrape);
+    //System.out.println(scrape);
     return scrape;
   }
 
-  public static void main(final String[] args) throws IOException {
-    Injector injector = Guice.createInjector(new SitesModule());
-    GsonReader gsonReader = injector.getInstance(GsonReader.class);
-    try (Reader data =
-        new InputStreamReader(GsonReader.class.getResourceAsStream("test.json"), "UTF-8")) {
-      // Parse JSON to Java
-      gsonReader.jsonStringToObject(data);
-    }
-  }
+//  public static void main(final String[] args) throws IOException {
+//    Injector injector = Guice.createInjector(new SitesModule());
+//    GsonReader gsonReader = injector.getInstance(GsonReader.class);
+//    try (Reader data =
+//        new InputStreamReader(GsonReader.class.getResourceAsStream("test.json"), "UTF-8")) {
+//      // Parse JSON to Java
+//      gsonReader.jsonStringToObject(data);
+//    }
+//  }
 }

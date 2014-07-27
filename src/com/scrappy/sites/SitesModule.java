@@ -8,7 +8,6 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.Provides;
 import com.google.inject.TypeLiteral;
-
 import com.scrappy.json.desrializer.ElementJsonDeserializer;
 import com.scrappy.json.desrializer.RelativeDeserializer;
 import com.scrappy.json.desrializer.ScrapeJsonDeserializer;
@@ -34,7 +33,7 @@ public class SitesModule extends AbstractModule {
   }
 
   @Provides
-  private Gson registerDesearilizerTypeAdaptors(Injector injector) {
+  public Gson registerDesearilizerTypeAdaptors(Injector injector) {
     GsonBuilder gsonBuilder = new GsonBuilder();
     gsonBuilder.registerTypeAdapter(Element.class,
         injector.getInstance(Key.get(new TypeLiteral<JsonDeserializer<Element>>() {})));
