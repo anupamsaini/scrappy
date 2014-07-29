@@ -1,5 +1,6 @@
 package com.scrappy.sites.interpretor;
 
+import java.net.URI;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -7,22 +8,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
 
 /**
  * Performs the actual interaction with webpage using {@link WebDriver} API.
  */
-public class WebDriverOperations {
+class WebDriverOperations {
 
-  public interface WebDriverOperationsFactory {
-    public WebDriverOperations create(@Assisted WebDriver driver);
-  }
-
-  private WebDriver webdriver;
+  private final WebDriver webdriver;
 
   @Inject
-  public WebDriverOperations(@Assisted WebDriver driver) {
+  public WebDriverOperations(WebDriver driver) {
     this.webdriver = driver;
+  }
+
+  protected WebDriver getDriver() {
+    return this.webdriver;
   }
 
   public List<WebElement> getDocumentByid(String id) {
@@ -39,5 +39,17 @@ public class WebDriverOperations {
 
   public List<WebElement> getDocumentByCss(String css) {
     return this.webdriver.findElements(By.className(css));
+  }
+
+  public void sendKeys(WebElement webElement, String key) {
+    webElement.sendKeys(key);
+  }
+
+  public void submit(WebElement webElement) {
+    webElement.submit();
+  }
+
+  public void getWebPage(URI uri) {
+    this.webdriver.get(uri.toString());
   }
 }
